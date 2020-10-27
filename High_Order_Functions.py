@@ -1,38 +1,33 @@
-def foo(k):  # This is a higher order function
-    global g
-    i = 27
-
-    def bar():
-        nonlocal i
-        i = 25
-        print("entering inner function")
-        # change outer scope's i
-
-        print(i)
-        print("leaving inner function")
-
-    print("entering foo")
-    print(g)
-    g = "changed in foo ;-)"
-    print(g)
-    bar()
-    print(".. leaving foo")
-    print(i)
+# High Order Function Examples
+# putting a function inside a variable
+def whisper(t):
+    return t.lower()
 
 
-g = "wow this is pretty cool"
-foo(7)
+lower = whisper
+print(lower("I didn't understand anything he was saying about Python... \n"))
+
+# Putting a function inside of another function
 
 
-def greet(name, msg):  # Another higher order function (maybe)
-    """
-    this function greets to the person with the provided message,
-    Where name defaults to "Tom and message defaults to "Good Morning!"
-    :param name: str: name of person
-    :param msg: str: what you want it to say
-    :return: message
-    """
-    print("Hello",name + ', ' + msg)
+def action(k):
+    global a
+    a = "I am the action in the first level of the function"
+
+    def sub():
+        print("Now inside inner function")
+        k = "Something happening in the inner function."
+        print(k)
+        print("Now exiting inner function")
+    sub()
+    print("Back in the first level of the function")
+    print(a)
+    print(f"You entered '{k}' into the action, congrats, it did nothing. \n")
 
 
-greet("Andrew", "Good Morning!")
+a = "I am outside the function "
+action("wow")  # Because variable 'a' is assigned in the function and it is a global, I have to reassign 'a'
+print(a, '\n')
+
+a = "I am outside the function \n "
+print(a)
